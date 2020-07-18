@@ -6,14 +6,10 @@ defmodule Livechat.Application do
   use Application
 
   def start(_type, _args) do
-    # List all child processes to be supervised
     children = [
-      # Start the Ecto repository
       Livechat.Repo,
-      # Start the endpoint when the application starts
+      {Phoenix.PubSub, name: Livechat.PubSub},
       LivechatWeb.Endpoint
-      # Starts a worker by calling: Livechat.Worker.start_link(arg)
-      # {Livechat.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
