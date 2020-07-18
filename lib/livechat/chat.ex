@@ -9,11 +9,11 @@ defmodule Livechat.Chat do
   alias Livechat.Chat.Message
 
   @topic inspect(__MODULE__)
-
   def subscribe do
     Phoenix.PubSub.subscribe(Livechat.PubSub, @topic)
   end
 
+  @spec list_messages :: any
   @doc """
   Returns the list of messages.
 
@@ -78,11 +78,11 @@ defmodule Livechat.Chat do
     message
     |> Message.changeset(attrs)
     |> Repo.update()
-    |> notify_subs([:message, :updated])
+        |> notify_subs([:message, :updated])
   end
 
   @doc """
-  Deletes a Message.
+  Deletes a message.
 
   ## Examples
 
@@ -105,7 +105,7 @@ defmodule Livechat.Chat do
   ## Examples
 
       iex> change_message(message)
-      %Ecto.Changeset{source: %Message{}}
+      %Ecto.Changeset{data: %Message{}}
 
   """
   def change_message(%Message{} = message, attrs \\ %{}) do
@@ -117,7 +117,7 @@ defmodule Livechat.Chat do
     {:ok, result}
   end
 
-  defp notify_subs({:error, reason}, _event) do
+  defp notify_subs({:error, reason}, _event ) do
     {:error, reason}
   end
 end

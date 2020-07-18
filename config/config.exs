@@ -13,10 +13,10 @@ config :livechat,
 # Configures the endpoint
 config :livechat, LivechatWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "ll0biYKQJ/EVHWAKmPTddGm/tJClIk6GTgj1LjKAZq/3Oeq2smeZFrdT0zBX0Aq7",
-  render_errors: [view: LivechatWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Livechat.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "wSSYvQLRC2b+a0V0wfp6ndkghN9ZwY3n"]
+  secret_key_base: "qsu5fjPIqYLkwSEhf6NrR3Wf1aHUQ1dOtqSFeE507kgCny0ttMbyuIuUbONm1oYt",
+  render_errors: [view: LivechatWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Livechat.PubSub,
+  live_view: [signing_salt: "ehWw3SB4"]
 
 # Configures Elixir's Logger
 config :logger, :console,

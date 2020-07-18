@@ -4,7 +4,7 @@ defmodule LivechatWeb.Live.Index do
   alias Livechat.Chat
   alias Livechat.Chat.Message
 
-  def mount(_session, socket) do
+  def mount(_, _session, socket) do
     if connected?(socket), do: Chat.subscribe()
     {:ok, fetch(socket)}
   end
@@ -32,11 +32,8 @@ defmodule LivechatWeb.Live.Index do
 
   def handle_event("send_message", %{"message" => params}, socket) do
     case Chat.create_message(params) do
-      {:ok, message} ->
-        {:noreply, fetch(socket, message.username)}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
+      {:ok, message} -> {:noreply, fetch(socket, message.username)}
+      {:error, %Ecto.Changeset{} = changeset} -> {:noreply, assign(socket, changeset: changeset)}
     end
   end
 
